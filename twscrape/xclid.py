@@ -49,7 +49,10 @@ def script_url(k: str, v: str):
 def get_scripts_list(text: str):
     scripts = text.split('e=>e+"."+')[1].split('[e]+"a.js"')[0]
     try:
-        for k, v in json.loads(scripts).items():
+        # Fix malformed JSON by adding quotes around unquoted object keys
+        # X introduced a bug where object keys aren't quoted in the script manifest
+        scripts_fixed = re.sub(r'([{,])(\w+):', r'\1"\2":', scripts)
+        for k, v in json.loads(scripts_fixed).items():
             yield script_url(k, f"{v}a")
     except json.decoder.JSONDecodeError as e:
         raise Exception("Failed to parse scripts") from e
