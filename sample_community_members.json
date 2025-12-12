@@ -1,0 +1,702 @@
+{
+  "data": {
+    "communityResults": {
+      "result": {
+        "__typename": "Community",
+        "members_slice": {
+          "items_results": [
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjo0NDQ5NTY1NzUy",
+                "community_role": "Admin",
+                "core": {
+                  "screen_name": "DerLoneWulf",
+                  "name": "\ud83e\uddc3"
+                },
+                "rest_id": "4449565752",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1978275365794824192/FGpFlUUQ_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": true,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6NDQ0OTU2NTc1Mg=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxOTU3NjcwMjQyMzI0NTUzNzI4",
+                "community_role": "Moderator",
+                "core": {
+                  "screen_name": "JQR247",
+                  "name": "Oswald Mosley Archive"
+                },
+                "rest_id": "1957670242324553728",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1980084346619936768/Dsr8tPQq_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTk1NzY3MDI0MjMyNDU1MzcyOA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODY3MDU2NjcxMjQxMTU4NjU2",
+                "community_role": "Moderator",
+                "core": {
+                  "screen_name": "caulin001",
+                  "name": "Caulin"
+                },
+                "rest_id": "1867056671241158656",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1991609519009591299/VuNztWQ9_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": true,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTg2NzA1NjY3MTI0MTE1ODY1Ng=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxNDMzMzkzMDU5ODQ5NDYxNzY4",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "iron_brian32",
+                  "name": "TheLastPrussian."
+                },
+                "rest_id": "1433393059849461768",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1840091213032046592/u0J-gx5V_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTQzMzM5MzA1OTg0OTQ2MTc2OA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODgzNTk4MDIxOTIyODY5MjQ4",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "racistnature",
+                  "name": "Nature is racist"
+                },
+                "rest_id": "1883598021922869248",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": true,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1991353011113775105/D1wYJfbq_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": true,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTg4MzU5ODAyMTkyMjg2OTI0OA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxNzI0ODcwODI5MzgzNzYxOTIw",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "jordabar",
+                  "name": "ELI\ud83d\udd3b"
+                },
+                "rest_id": "1724870829383761920",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1954948896079130624/A0nVFRHv_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTcyNDg3MDgyOTM4Mzc2MTkyMA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODU1NTczMjczNTgyNDMyMjU2",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "AmityLeslie",
+                  "name": "Amity Leslie"
+                },
+                "rest_id": "1855573273582432256",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1966204958572703744/9UsOyWhO_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTg1NTU3MzI3MzU4MjQzMjI1Ng=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODIyMTE2NjAzMDAzMDk3MDg4",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "inVeritasX",
+                  "name": "\ud835\udd4d\ud835\udd56\ud835\udd63\ud835\udd5a\ud835\udd65\ud835\udd52\ud835\udd64 NNN"
+                },
+                "rest_id": "1822116603003097088",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1998358498795528192/h9De2K5U_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTgyMjExNjYwMzAwMzA5NzA4OA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxNTY3NTQ2NTE2NTQxMTY5NjY5",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "hadrian70aD",
+                  "name": "Gentilissimus"
+                },
+                "rest_id": "1567546516541169669",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1900879403090857984/mJUw_A1a_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTU2NzU0NjUxNjU0MTE2OTY2OQ=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxNTIwNjk1MjY3MjAwMjc4NTI4",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "Theodoric90",
+                  "name": "Theodoric"
+                },
+                "rest_id": "1520695267200278528",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1840846145041350656/tcVBA-3y_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTUyMDY5NTI2NzIwMDI3ODUyOA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODE4MzY3MTA2OTkzNjAyNTYx",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "patrick_he97432",
+                  "name": "Patrick Henry"
+                },
+                "rest_id": "1818367106993602561",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1924971870216179712/pmYZNzwT_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTgxODM2NzEwNjk5MzYwMjU2MQ=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODc3MDA2MTc4OTIxNjgwODk2",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "Ben_2006_",
+                  "name": "Ben gen.Z"
+                },
+                "rest_id": "1877006178921680896",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1883650398252142592/HLUh6_tt_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": true,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTg3NzAwNjE3ODkyMTY4MDg5Ng=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODA3MTI0ODgyMTIxMTk5NjE2",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "americanson57",
+                  "name": "Patriot57"
+                },
+                "rest_id": "1807124882121199616",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1993833352223485952/ynEiemjD_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTgwNzEyNDg4MjEyMTE5OTYxNg=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODE2MjUwMDAwMzE1NDEyNDgx",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "TreasoNoose",
+                  "name": "RJ La Rash"
+                },
+                "rest_id": "1816250000315412481",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1816250305714978817/wenP8Va6_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": true,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTgxNjI1MDAwMDMxNTQxMjQ4MQ=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxOTU3NTQ2OTEzODEwNzcxOTcw",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "LedZeprockstar",
+                  "name": "LedZep"
+                },
+                "rest_id": "1957546913810771970",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTk1NzU0NjkxMzgxMDc3MTk3MA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODg1NDk0OTE3ODY0MjQzMjAw",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "firehead1488",
+                  "name": "Bellamy 1892"
+                },
+                "rest_id": "1885494917864243200",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1954201259264651264/xyWScrHQ_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTg4NTQ5NDkxNzg2NDI0MzIwMA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxOTM5NzUzMTM1NjA3ODgxNzMw",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "Sagebrush_fren",
+                  "name": "Sagebrush Phil"
+                },
+                "rest_id": "1939753135607881730",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1978507465575825410/g727Mp8b_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTkzOTc1MzEzNTYwNzg4MTczMA=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxNTIxMTk2MjY0NDY0OTk0MzA2",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "Yazzyinit",
+                  "name": "Gerry OBreen\u271d\ufe0f\ud83c\uddee\ud83c\uddea"
+                },
+                "rest_id": "1521196264464994306",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1981851944315506688/vo2pA36y_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": false,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTUyMTE5NjI2NDQ2NDk5NDMwNg=="
+            },
+            {
+              "result": {
+                "__typename": "User",
+                "id": "VXNlcjoxODQ0MTgxMzI3NzE0ODUyODY0",
+                "community_role": "Member",
+                "core": {
+                  "screen_name": "thebasedbarber",
+                  "name": "The Based Barber"
+                },
+                "rest_id": "1844181327714852864",
+                "legacy": {
+                  "follow_request_sent": false
+                },
+                "privacy": {
+                  "protected": false
+                },
+                "relationship_perspectives": {
+                  "blocking": false,
+                  "followed_by": false,
+                  "following": false
+                },
+                "super_following": false,
+                "super_follow_eligible": false,
+                "super_followed_by": false,
+                "affiliates_highlighted_label": {},
+                "avatar": {
+                  "image_url": "https://pbs.twimg.com/profile_images/1949873186599780352/AeRjn3WL_normal.jpg"
+                },
+                "identity_profile_labels_highlighted_label": {},
+                "is_blue_verified": true,
+                "verification": {
+                  "verified": false
+                }
+              },
+              "id": "VXNlclJlc3VsdHM6MTg0NDE4MTMyNzcxNDg1Mjg2NA=="
+            }
+          ],
+          "slice_info": {
+            "next_cursor": "CycRAAAAAAwABAwKmwzBVQo+vRmX2SWL2iABCm07AAABmNl90CwADJorCj69f/////////8KbTt//////////wAIP8AAAAACAAAA"
+          }
+        },
+        "id": "Q29tbXVuaXR5OjE5NTgwMDAzMzU4NDQ0Mzg1MDM="
+      },
+      "id": "Q29tbXVuaXR5UmVzdWx0czoxOTU4MDAwMzM1ODQ0NDM4NTAz"
+    }
+  }
+}
