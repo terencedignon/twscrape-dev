@@ -1,0 +1,48 @@
+{
+  "data": {
+    "user_result_by_screen_name": {
+      "result": {
+        "__typename": "User",
+        "avatar": {
+          "image_url": "https://pbs.twimg.com/profile_images/1896365550491607040/CQ1Znr-n_normal.jpg"
+        },
+        "core": {
+          "screen_name": "arditi_media",
+          "name": "Arditi Media",
+          "created_at": "Mon Mar 03 01:02:00 +0000 2025"
+        },
+        "profile_image_shape": "Circle",
+        "verification": {
+          "verified": false
+        },
+        "affiliates_highlighted_label": {},
+        "is_blue_verified": true,
+        "privacy": {
+          "protected": false
+        },
+        "about_profile": {
+          "created_country_accurate": true,
+          "account_based_in": "United States",
+          "location_accurate": true,
+          "learn_more_url": "https://help.twitter.com/managing-your-account/about-twitter-verified-accounts",
+          "source": "Canada App Store",
+          "username_changes": {
+            "count": "4",
+            "last_changed_at_msec": "1762812689199"
+          }
+        },
+        "rest_id": "1896365307419058176",
+        "verification_info": {
+          "reason": {
+            "verified_since_msec": "1740976673012"
+          },
+          "id": "VXNlclZlcmlmaWNhdGlvbkluZm86MTg5NjM2NTMwNzQxOTA1ODE3Ng==",
+          "is_identity_verified": false
+        },
+        "identity_profile_labels_highlighted_label": {},
+        "id": "VXNlcjoxODk2MzY1MzA3NDE5MDU4MTc2"
+      },
+      "id": "VXNlclJlc3VsdHM6MTg5NjM2NTMwNzQxOTA1ODE3Ng=="
+    }
+  }
+}

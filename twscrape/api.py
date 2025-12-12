@@ -20,6 +20,10 @@ OP_Retweeters = "IQ43ps3iEcdrGV_OL1QaRw/Retweeters"
 OP_UserTweets = "lZRf8IC-GTuGxDwcsHW8aw/UserTweets"
 OP_UserTweetsAndReplies = "gXCeOBFsTOuimuCl1qXimg/UserTweetsAndReplies"
 OP_ListLatestTweetsTimeline = "NRigOCel0QKiWs_GuBgOzw/ListLatestTweetsTimeline"
+OP_CommunityTweetsTimeline = "mvvfN7tozrFnot9Rfbp_Mw/CommunityTweetsTimeline"
+OP_membersSliceTimeline_Query = "WSbJGJjZaVasSj9bnqSZSA/membersSliceTimeline_Query"
+OP_AudioSpaceById = "rC2zlE1t7SHbVG8obPZliQ/AudioSpaceById"
+OP_AboutAccountQuery = "zs_jFPFT78rBpXv9Z3U2YQ/AboutAccountQuery"
 OP_BlueVerifiedFollowers = "mtuBQZOWziVtBIcSLg6V_g/BlueVerifiedFollowers"
 OP_UserCreatorSubscriptions = "7qcGrVKpcooih_VvJLA1ng/UserCreatorSubscriptions"
 OP_UserMedia = "1D04dx9H2pseMQAbMjXTvQ/UserMedia"
@@ -121,7 +125,7 @@ class API:
                 params = {"variables": kv, "features": ft}
                 if cur is not None:
                     params["variables"]["cursor"] = cur
-                if queue in ("SearchTimeline", "ListLatestTweetsTimeline"):
+                if queue in ("SearchTimeline", "ListLatestTweetsTimeline", "CommunityTweetsTimeline"):
                     params["fieldToggles"] = {"withArticleRichContentState": False}
                 if queue in ("UserMedia",):
                     params["fieldToggles"] = {"withArticlePlainText": False}
@@ -163,7 +167,7 @@ class API:
                 params = {"variables": kv, "features": ft}
                 if cur is not None:
                     params["variables"]["cursor"] = cur
-                if queue in ("SearchTimeline", "ListLatestTweetsTimeline"):
+                if queue in ("SearchTimeline", "ListLatestTweetsTimeline", "CommunityTweetsTimeline"):
                     params["fieldToggles"] = {"withArticleRichContentState": False}
                 if queue in ("UserMedia",):
                     params["fieldToggles"] = {"withArticlePlainText": False}
@@ -622,6 +626,71 @@ class API:
             async for rep in gen:
                 for x in parse_tweets(rep, limit):
                     yield x
+
+    # community_timeline
+
+    async def community_timeline_raw(self, community_id: str, limit=-1, kv: KV = None):
+        op = OP_CommunityTweetsTimeline
+        kv = {
+            "communityId": str(community_id),
+            "count": 20,
+            "displayLocation": "Community",
+            "rankingMode": "Relevance",
+            "withCommunity": True,
+            **(kv or {}),
+        }
+        async with aclosing(self._gql_items(op, kv, limit=limit)) as gen:
+            async for x in gen:
+                yield x
+
+    async def community_timeline(self, community_id: str, limit=-1, kv: KV = None):
+        async with aclosing(self.community_timeline_raw(community_id, limit=limit, kv=kv)) as gen:
+            async for rep in gen:
+                for x in parse_tweets(rep, limit):
+                    yield x
+
+    # community_members
+
+    async def community_members_raw(self, community_id: str, kv: KV = None):
+        op = OP_membersSliceTimeline_Query
+        kv = {"communityId": str(community_id), **(kv or {})}
+        return await self._gql_item(op, kv)
+
+    async def community_members(self, community_id: str, kv: KV = None):
+        """Returns community members data. Use parse_users on the result if needed."""
+        return await self.community_members_raw(community_id, kv=kv)
+
+    # audio_space
+
+    async def audio_space_raw(self, space_id: str, kv: KV = None):
+        op = OP_AudioSpaceById
+        kv = {
+            "id": space_id,
+            "isMetatagsQuery": False,
+            "withReplays": True,
+            "withListeners": True,
+            **(kv or {}),
+        }
+        ft = {
+            "spaces_2022_h2_spaces_communities": True,
+            "spaces_2022_h2_clipping": True,
+        }
+        return await self._gql_item(op, kv, ft)
+
+    async def audio_space(self, space_id: str, kv: KV = None):
+        """Returns raw audio space data (no parsing implemented yet)"""
+        return await self.audio_space_raw(space_id, kv=kv)
+
+    # about_account
+
+    async def about_account_raw(self, screen_name: str, kv: KV = None):
+        op = OP_AboutAccountQuery
+        kv = {"screenName": screen_name, **(kv or {})}
+        return await self._gql_item(op, kv)
+
+    async def about_account(self, screen_name: str, kv: KV = None):
+        """Returns raw account about data (no parsing implemented yet)"""
+        return await self.about_account_raw(screen_name, kv=kv)
 
     # trends
 
