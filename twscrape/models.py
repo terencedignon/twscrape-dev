@@ -740,7 +740,7 @@ def _parse_card(obj: dict, url: str):
             video=video,
         )
 
-    if re.match(r"poll\d+choice_text_only", name):
+    if re.match(r"poll\d+choice_(text_only|image|video)", name):
         val = _parse_card_prepare_values(obj)
 
         options = []
@@ -777,6 +777,65 @@ def _parse_card(obj: dict, url: str):
 
         # print(json.dumps(val, indent=2))
         return AudiospaceCard(url=card_url)
+
+    # Periscope/Twitter Live broadcasts (deprecated but still in old tweets)
+    if name == "3691233323:periscope_broadcast":
+        val = _parse_card_prepare_values(obj)
+        card_url = _parse_card_get_str(val, "url") or _parse_card_get_str(val, "card_url")
+        card_title = _parse_card_get_str(val, "title") or "Periscope Broadcast"
+        photo, _ = _parse_card_extract_largest_photo(val)
+        return BroadcastCard(title=card_title, url=card_url or url, photo=photo)
+
+    # Live events
+    if name == "745291183405076480:live_event":
+        val = _parse_card_prepare_values(obj)
+        card_url = _parse_card_get_str(val, "card_url") or _parse_card_get_str(val, "event_url")
+        card_title = _parse_card_get_str(val, "event_title") or _parse_card_get_str(val, "title") or "Live Event"
+        photo, _ = _parse_card_extract_largest_photo(val)
+        return BroadcastCard(title=card_title, url=card_url or url, photo=photo)
+
+    # Promoted conversation cards (legacy ad format)
+    if name in {"promo_image_convo", "promo_video_convo"}:
+        val = _parse_card_prepare_values(obj)
+        title, val = _parse_card_extract_title(val)
+        description, val = _parse_card_extract_str(val, "description")
+        card_url = _parse_card_get_str(val, "card_url")
+        photo, val = _parse_card_extract_largest_photo(val)
+        return SummaryCard(
+            title=title or "Promoted",
+            description=description,
+            vanityUrl=None,
+            url=card_url or url,
+            photo=photo,
+        )
+
+    # App install cards
+    if name == "app":
+        val = _parse_card_prepare_values(obj)
+        title, val = _parse_card_extract_title(val)
+        description, val = _parse_card_extract_str(val, "description")
+        card_url = _parse_card_get_str(val, "card_url") or _parse_card_get_str(val, "app_url")
+        photo, val = _parse_card_extract_largest_photo(val)
+        return SummaryCard(
+            title=title or "App",
+            description=description,
+            vanityUrl=None,
+            url=card_url or url,
+            photo=photo,
+        )
+
+    # Direct Message cards (business accounts)
+    if name == "2586390716:message_me":
+        val = _parse_card_prepare_values(obj)
+        card_url = _parse_card_get_str(val, "card_url")
+        cta = _parse_card_get_str(val, "cta") or "Message"
+        return SummaryCard(
+            title=cta,
+            description=None,
+            vanityUrl=None,
+            url=card_url or url,
+            photo=None,
+        )
 
     logger.warning(f"Unknown card type '{name}' on {url}")
     if "PYTEST_CURRENT_TEST" in os.environ:  # help debugging tests

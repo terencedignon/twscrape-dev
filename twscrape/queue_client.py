@@ -114,6 +114,16 @@ def dump_rep(rep: Response):
 
 
 class QueueClient:
+    # Track soft errors per account for pattern detection
+    _soft_error_counts: dict[str, int] = {}  # username -> consecutive soft error count
+    _soft_error_threshold = 5  # Lock after this many consecutive soft errors
+    _soft_error_lock_minutes = 3  # Lock duration for soft errors
+
+    # Exponential backoff for error 88 (rate limit exceeded with remaining > 0)
+    _ban_strikes: dict[str, int] = {}  # username -> strike count
+    _ban_strike_max = 6  # Mark inactive after this many strikes (after ~24hr total backoff)
+    _ban_backoff_base_minutes = 60  # Base backoff: 60, 120, 240, 480, 540 min (~24hr total), then inactive
+
     def __init__(self, pool: AccountsPool, queue: str, debug=False, proxy: str | None = None):
         self.pool = pool
         self.queue = queue
@@ -197,12 +207,10 @@ class QueueClient:
             await self._close_ctx(limit_reset)
             raise HandledError()
 
-        # no way to check is account banned in direct way, but this check should work
+        # Error 88 with remaining > 0 indicates possible ban - use exponential backoff
         if err_msg.startswith("(88) Rate limit exceeded") and limit_remaining > 0:
-            logger.warning(f"Ban detected: {log_msg}")
-            # Log the raw response details for analysis
             self._log_rate_limit_response(rep, err_msg, "error_88_ban")
-            await self._close_ctx(-1, inactive=True, msg=err_msg)
+            await self._handle_ban_strike(err_msg)
             raise HandledError()
 
         if err_msg.startswith("(326) Authorization: Denied by access control"):
@@ -243,7 +251,14 @@ class QueueClient:
             logger.warning(f"API unknown error: {log_msg}")
             # Log unknown API errors for analysis
             self._log_rate_limit_response(rep, err_msg, "api_unknown_error")
-            return  # ignore any other unknown errors
+
+            # Handle soft errors with pattern detection
+            await self._handle_soft_error(err_msg)
+            return  # continue after handling
+
+        # Reset soft error counter on success
+        if self.ctx:
+            self._reset_soft_errors(self.ctx.acc.username)
 
         # Log successful requests (sampled to reduce volume)
         # Sample 1 in 20 successful requests, or always log if remaining is low
@@ -256,6 +271,83 @@ class QueueClient:
         except httpx.HTTPStatusError:
             logger.error(f"Unhandled API response code: {log_msg}")
             await self._close_ctx(utc.ts() + 60 * 15)  # 15 minutes
+            raise HandledError()
+
+    def _reset_soft_errors(self, username: str):
+        """Reset soft error counter for an account after successful request."""
+        if username in QueueClient._soft_error_counts:
+            del QueueClient._soft_error_counts[username]
+        # Also reset ban strikes on successful request
+        if username in QueueClient._ban_strikes:
+            del QueueClient._ban_strikes[username]
+
+    async def _handle_ban_strike(self, err_msg: str):
+        """
+        Handle error 88 (rate limit exceeded with remaining > 0) with exponential backoff.
+
+        Strike 1: 15 min backoff
+        Strike 2: 30 min backoff
+        Strike 3: 60 min backoff
+        Strike 4: 120 min backoff
+        Strike 5: Mark inactive
+        """
+        if self.ctx is None:
+            return
+
+        username = self.ctx.acc.username
+        QueueClient._ban_strikes[username] = QueueClient._ban_strikes.get(username, 0) + 1
+        strikes = QueueClient._ban_strikes[username]
+
+        if strikes >= QueueClient._ban_strike_max:
+            logger.warning(
+                f"Account {username} hit {strikes} ban strikes, marking inactive"
+            )
+            del QueueClient._ban_strikes[username]
+            await self._close_ctx(-1, inactive=True, msg=err_msg)
+            return
+
+        # Exponential backoff: 60, 120, 240, 480, then remainder to reach 24hr total
+        # Total: 60 + 120 + 240 + 480 + 540 = 1440 min (24hr)
+        base_backoff = QueueClient._ban_backoff_base_minutes * (2 ** (strikes - 1))
+        cumulative_so_far = sum(60 * (2 ** i) for i in range(strikes - 1))  # Previous backoffs
+        remaining_to_24hr = 1440 - cumulative_so_far
+        backoff_minutes = min(base_backoff, remaining_to_24hr)
+        logger.warning(
+            f"Account {username} ban strike {strikes}/{QueueClient._ban_strike_max}, "
+            f"backing off for {backoff_minutes} minutes"
+        )
+        await self._close_ctx(utc.ts() + 60 * backoff_minutes)
+
+    async def _handle_soft_error(self, err_msg: str):
+        """
+        Handle soft errors (200 status with error in body) with pattern detection.
+
+        - (29) Timeout errors: Lock immediately for 2 minutes (Twitter overloaded)
+        - (0) Not found: Ignore single occurrences (could be deleted content)
+        - Other errors: Track consecutive occurrences, lock after threshold
+        """
+        if self.ctx is None:
+            return
+
+        username = self.ctx.acc.username
+
+        # Immediate lock for timeout errors - Twitter is telling us to slow down
+        if "(29) Timeout" in err_msg:
+            logger.info(f"Timeout error for {username}, locking for 2 minutes")
+            await self._close_ctx(utc.ts() + 60 * 2)  # 2 minutes
+            raise HandledError()
+
+        # For other soft errors, track consecutive occurrences
+        QueueClient._soft_error_counts[username] = QueueClient._soft_error_counts.get(username, 0) + 1
+        count = QueueClient._soft_error_counts[username]
+
+        if count >= QueueClient._soft_error_threshold:
+            logger.warning(
+                f"Account {username} hit {count} consecutive soft errors, "
+                f"locking for {QueueClient._soft_error_lock_minutes} minutes"
+            )
+            QueueClient._soft_error_counts[username] = 0  # Reset counter
+            await self._close_ctx(utc.ts() + 60 * QueueClient._soft_error_lock_minutes)
             raise HandledError()
 
     def _log_rate_limit_response(self, rep: Response, err_msg: str, event_type: str):
