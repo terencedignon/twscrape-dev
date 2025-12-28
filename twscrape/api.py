@@ -34,6 +34,7 @@ OP_ProfileSpotlightsQuery = "mzoqrVGwk-YTSGME1dRfXQ/ProfileSpotlightsQuery"
 OP_CreateTweet = "Uf3io9zVp1DsYxrmL5FJ7g/CreateTweet"
 
 GQL_URL = "https://x.com/i/api/graphql"
+REST_URL = "https://x.com/i/api/1.1"
 GQL_FEATURES = {  # search values here (view source) https://x.com/
     "articles_preview_enabled": True,
     "c9s_tweet_anatomy_moderator_badge_enabled": True,
@@ -225,6 +226,12 @@ class API:
                 "queryId": op.split("/")[0],
             }
             return await client.post(f"{GQL_URL}/{op}", payload)
+
+    async def _rest_get(self, endpoint: str, params: dict, queue: str | None = None):
+        """Execute a REST API GET request."""
+        queue = queue or endpoint.split("/")[-1].replace(".json", "")
+        async with QueueClient(self.pool, queue, self.debug, proxy=self.proxy) as client:
+            return await client.get(f"{REST_URL}/{endpoint}", params=params)
 
     # search
 
@@ -815,6 +822,73 @@ class API:
     async def about_account(self, screen_name: str, kv: KV = None):
         """Returns raw account about data (no parsing implemented yet)"""
         return await self.about_account_raw(screen_name, kv=kv)
+
+    # user_recommendations (REST API)
+
+    async def user_recommendations_raw(self, uid: int, limit: int = 20, kv: KV = None):
+        """
+        Get recommended users to follow based on a given user profile.
+
+        This uses Twitter's REST API endpoint for "Who to follow" recommendations.
+
+        Args:
+            uid: The user ID to get recommendations for
+            limit: Maximum number of recommendations to return (default 20)
+            kv: Additional parameters to merge
+
+        Returns:
+            Raw API response
+        """
+        params = {
+            "include_profile_interstitial_type": 1,
+            "include_blocking": 1,
+            "include_blocked_by": 1,
+            "include_followed_by": 1,
+            "include_want_retweets": 1,
+            "include_mute_edge": 1,
+            "include_can_dm": 1,
+            "include_can_media_tag": 1,
+            "include_ext_is_blue_verified": 1,
+            "include_ext_verified_type": 1,
+            "include_ext_profile_image_shape": 1,
+            "skip_status": 1,
+            "pc": "true",
+            "display_location": "profile-cluster-follow",
+            "limit": limit,
+            "user_id": uid,
+            **(kv or {}),
+        }
+        return await self._rest_get("users/recommendations.json", params, queue="UserRecommendations")
+
+    async def user_recommendations(self, uid: int, limit: int = 20, kv: KV = None):
+        """
+        Get recommended users to follow based on a given user profile.
+
+        This uses Twitter's REST API endpoint for "Who to follow" recommendations.
+
+        Args:
+            uid: The user ID to get recommendations for
+            limit: Maximum number of recommendations to return (default 20)
+            kv: Additional parameters to merge
+
+        Yields:
+            User objects for each recommended user
+        """
+        rep = await self.user_recommendations_raw(uid, limit=limit, kv=kv)
+        if rep is None:
+            return
+
+        data = rep.json()
+        # REST API returns a list of user objects directly
+        if isinstance(data, list):
+            for user_obj in data:
+                # The user data may be nested under 'user' key
+                user_data = user_obj.get("user", user_obj)
+                if user_data and "id_str" in user_data:
+                    try:
+                        yield User.parse(user_data)
+                    except Exception:
+                        continue
 
     # profile_spotlights
 
